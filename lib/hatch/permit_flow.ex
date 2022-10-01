@@ -27,6 +27,10 @@ defmodule Hatch.PermitFlow do
     :ok
   end
 
+  def can_reject?(%Permit{status: "needs_submission"}) do
+    {:error, "Must be submitted first!"}
+  end
+
   def can_reject?(%Permit{status: "rejected"}) do
     {:error, "Already rejected!"}
   end
