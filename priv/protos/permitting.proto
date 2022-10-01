@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package hatch.permitting;
+
+// FSM state
+message Permit {
+  string permit_id = 1;
+  string status = 2;
+  string submitted_by = 3;
+  string notes = 4;
+  string authority = 5;
+  string rejection_reason = 6;
+  int32 required_on = 7;
+  int32 submitted_on = 8;
+  int32 approved_on = 9;
+  int32 rejected_on = 10;
+}
+
+// Commands
+message RequirePermit {
+  string permit_id = 1;
+  string authority = 2;
+  string notes = 3;
+}
+
+message RejectPermit {
+    string permit_id = 1;
+    string rejection_reason = 2;
+}
+
+message SubmitPermit {
+    string permit_id = 1;
+}
+
+message ApprovePermit {
+    string permit_id = 1;
+}
+
+// Events
+message PermitApproved {
+    string permit_id = 1;
+    int32 approved_on = 2;
+}
+
+message PermitRejected {
+    string permit_id = 1;
+    int32 rejected_on = 2;
+    string rejection_reason = 3;
+}
+
+message PermitRequired {
+    string permit_id = 1;
+    int32 required_on = 2;
+    string authority = 3;
+}
+
+message PermitSubmitted {
+    string permit_id = 1;
+    int32 submitted_on = 2;
+}
