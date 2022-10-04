@@ -1,6 +1,6 @@
 # Hatch
 
-**A basic state machine workflow modeling a typical approval process with basic invariants to uphold.**
+**A basic state machine workflow modeling a typical approval process with basic invariants to uphold using Spawn.**
 
 ## Installation
 
