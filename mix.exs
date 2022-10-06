@@ -22,10 +22,9 @@ defmodule Hatch.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:spawn_sdk, path: "../oss/spawn/apps/spawn_sdk"},
-      #{:spawn_sdk, path: "../../eigr/spawn/apps/spawn_sdk"},
+      # {:spawn_sdk, path: "../oss/spawn/apps/spawn_sdk"},
+      {:spawn_sdk, path: "../../eigr/spawn/apps/spawn_sdk"},
       {:uniq, "~> 0.5.3"}
-
     ]
   end
 end
