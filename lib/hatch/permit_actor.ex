@@ -13,6 +13,12 @@ defmodule Hatch.PermitActor do
   use SpawnSdk.Actor,
     abstract: true,
     state_type: Hatch.Permitting.Permit
+    actions: [
+      :approve,
+      :reject,
+      :require,
+      :submit
+    ]
 
   require Logger
   alias Hatch.PermitFlow
