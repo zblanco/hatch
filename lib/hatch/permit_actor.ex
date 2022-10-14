@@ -13,14 +13,9 @@ defmodule Hatch.PermitActor do
   use SpawnSdk.Actor,
     abstract: true,
     state_type: Hatch.Permitting.Permit
-    actions: [
-      :approve,
-      :reject,
-      :require,
-      :submit
-    ]
 
   require Logger
+
   alias Hatch.PermitFlow
 
   alias Hatch.Permitting.{
@@ -36,11 +31,7 @@ defmodule Hatch.PermitActor do
     PermitRejected
   }
 
-  @impl true
-  def handle_command(
-        {:require, %RequirePermit{} = cmd},
-        %Context{} = ctx
-      ) do
+  defact require(%RequirePermit{} = cmd, %Context{} = ctx) do
     Logger.info("Received Request: #{inspect(cmd)}. Context: #{inspect(ctx)}")
 
     permit = PermitFlow.init(cmd)
@@ -52,10 +43,7 @@ defmodule Hatch.PermitActor do
     |> Value.reply!()
   end
 
-  def handle_command(
-        {:submit, %SubmitPermit{} = cmd},
-        %Context{state: permit} = ctx
-      ) do
+  defact submit(%SubmitPermit{} = cmd, %Context{state: permit} = ctx) do
     Logger.info("Received Request: #{inspect(cmd)}. Context: #{inspect(ctx)}")
 
     case PermitFlow.can_submit?(permit) do
@@ -76,10 +64,7 @@ defmodule Hatch.PermitActor do
     end
   end
 
-  def handle_command(
-        {:reject, %RejectPermit{} = cmd},
-        %Context{state: permit} = ctx
-      ) do
+  defact reject(%RejectPermit{} = cmd, %Context{state: permit} = ctx) do
     Logger.info("Received Request: #{inspect(cmd)}. Context: #{inspect(ctx)}")
 
     case PermitFlow.can_reject?(permit) do
@@ -104,10 +89,7 @@ defmodule Hatch.PermitActor do
     end
   end
 
-  def handle_command(
-        {:approve, %ApprovePermit{} = cmd},
-        %Context{state: permit} = ctx
-      ) do
+  defact approve(%ApprovePermit{} = cmd, %Context{state: permit} = ctx) do
     Logger.info("Received Request: #{inspect(cmd)}. Context: #{inspect(ctx)}")
 
     case PermitFlow.can_approve?(permit) do
