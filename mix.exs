@@ -22,8 +22,9 @@ defmodule Hatch.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:spawn_sdk, path: "../../eigr/spawn/spawn_sdk/spawn_sdk"},
-      {:spawn_sdk, path: "../oss/spawn/spawn_sdk/spawn_sdk"},
+      {:spawn_sdk, "~> 0.1.0"},
+      # You can remove this if you will ONLY USE non-persistent actors
+      {:spawn_statestores, "~> 0.1.0"},
       {:uniq, "~> 0.5.3"}
     ]
   end
